@@ -1,20 +1,9 @@
-define(function () {
-    return {
-        rows: [{
-            view: 'button',
-            label: 'Main',
-            click: function () {
-                routie('')
-            }
-        },
-            {
-                view: 'list',
-                data: [
-                    'audi a5',
-                    'lada granta',
-                    'bmw i8'
-                ]
-            }
+define(['component/listPage'], function (listPage) {
+    return listPage(
+        'carList',
+        'resource->/api/car',
+        [
+            {id: "name", editor: "text"}
         ]
-    }
+        )
 })
