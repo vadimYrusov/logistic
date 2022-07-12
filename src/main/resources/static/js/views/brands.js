@@ -3,6 +3,6 @@ define(['component/listPage'], function (listPage) {
         'brandList',
         'resource->/api/brand',
         [
-            {id: "name", editor: "text"}
+            {id: 'name', editor: 'text'}
         ])
 })

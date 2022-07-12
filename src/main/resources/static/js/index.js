@@ -9,35 +9,36 @@ function buildRoute(view) {
             rows: [
                 view
             ]
-        }, $$("root"))
+        }, $$('root'))
     }
 }
 
 function buildButton(label, route) {
     return {
-        view: "button",
+        view: 'button',
         value: label,
         width: 100,
-        align: "center",
+        align: 'center',
         click: function () {
             routie(route)
         }
     }
 }
 
-require(['views/main', 'views/cars', 'views/brands', 'util/resourceProxy'],
-    function (main, cars, brands, resourceProxy) {
+require(['views/main', 'views/cars', 'views/brands', 'views/models', 'util/resourceProxy'],
+    function (main, cars, brands, models, resourceProxy) {
         webix.ready(function () {
             webix.ui({
-                container: "app",
+                container: 'app',
                 width: document.body.clientWidth,
                 height: document.body.clientHeight,
                 rows: [
                     {
-                        view: "toolbar",
+                        view: 'toolbar',
                         cols: [
                             buildButton('Home', ''),
                             buildButton('Brands', 'brands'),
+                            buildButton('Model', 'models'),
                             buildButton('Cars', 'cars')
                         ]
                     },
@@ -45,12 +46,13 @@ require(['views/main', 'views/cars', 'views/brands', 'util/resourceProxy'],
                         id: 'root'
                     }
                 ]
-            });
+            })
         })
 
         routie({
             '': buildRoute(main),
             'cars': buildRoute(cars),
+            'models': buildRoute(models),
             'brands' : buildRoute(brands)
         })
     })

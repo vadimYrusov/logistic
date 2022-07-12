@@ -4,7 +4,7 @@ define(function () {
     })
     webix.proxy.resource = {
         init: function () {
-            webix.extend(this, webix.proxy.rest);
+            webix.extend(this, webix.proxy.rest)
         },
         load: function (view, params) {
             var args = ''

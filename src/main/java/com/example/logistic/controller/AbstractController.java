@@ -1,5 +1,7 @@
 package com.example.logistic.controller;
 
+import com.example.logistic.dto.ListItemDto;
+import com.example.logistic.entity.ComboListItem;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,7 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-public abstract class AbstractController<T, R extends JpaRepository<T, ?>> {
+import java.util.List;
+import java.util.stream.Collectors;
+
+public abstract class AbstractController<T extends ComboListItem, R extends JpaRepository<T, ?>> {
 
     protected R repository;
 
@@ -42,4 +47,11 @@ public abstract class AbstractController<T, R extends JpaRepository<T, ?>> {
         repository.delete(dbObj);
     }
 
+    @GetMapping("list")
+    public List<ListItemDto> list() {
+        return repository.findAll()
+                .stream()
+                .map(entity -> new ListItemDto(entity.getId(), entity.getName()))
+                .collect(Collectors.toList());
+    }
 }
